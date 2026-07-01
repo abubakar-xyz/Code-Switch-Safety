@@ -1,0 +1,4 @@
+provider,model,status,rows
+gemini,gemini-3.5-flash,error,23
+gemini,gemini-3.5-flash,ok,4
+openai,gpt-4o,ok,27

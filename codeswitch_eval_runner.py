@@ -10,11 +10,11 @@ Default model pair:
   - Gemini:  gemini-3.5-flash
 
 Input:
-  codeswitch_model_facing_prompts_clean.csv
+    data/private/prompts/codeswitch_model_facing_prompts_clean.csv
 
 Outputs:
-  outputs_raw.csv
-  run_summary_latest.csv
+    data/private/outputs/outputs_raw.csv
+    results/run_summary_latest.csv
 
 Environment variables:
   OPENAI_API_KEY=...
@@ -141,6 +141,7 @@ def already_completed(existing: pd.DataFrame, prompt_id: str, provider: str, mod
 
 def append_row_csv(path: str, row: Dict[str, Any]) -> None:
     output_path = Path(path)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
     pd.DataFrame([row]).to_csv(
         output_path,
         mode="a",
@@ -307,6 +308,7 @@ def write_summary(output_path: str, summary_path: str) -> None:
         .reset_index(name="rows")
         .sort_values(["provider", "model", "status"])
     )
+    Path(summary_path).parent.mkdir(parents=True, exist_ok=True)
     summary.to_csv(summary_path, index=False)
 
     print("\nRun summary:")
@@ -325,9 +327,9 @@ def write_summary(output_path: str, summary_path: str) -> None:
 
 def build_arg_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="Run CodeSwitch-Safety prompts against OpenAI/Gemini APIs.")
-    parser.add_argument("--input", default="codeswitch_model_facing_prompts_clean.csv")
-    parser.add_argument("--output", default="outputs_raw.csv")
-    parser.add_argument("--summary-output", default="run_summary_latest.csv")
+    parser.add_argument("--input", default="data/private/prompts/codeswitch_model_facing_prompts_clean.csv")
+    parser.add_argument("--output", default="data/private/outputs/outputs_raw.csv")
+    parser.add_argument("--summary-output", default="results/run_summary_latest.csv")
     parser.add_argument("--providers", choices=["openai", "gemini", "both"], default="both")
     parser.add_argument("--openai-models", nargs="*", default=DEFAULT_OPENAI_MODELS)
     parser.add_argument("--gemini-models", nargs="*", default=DEFAULT_GEMINI_MODELS)

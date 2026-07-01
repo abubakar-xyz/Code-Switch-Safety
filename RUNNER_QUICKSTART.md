@@ -2,7 +2,7 @@
 
 ## Files
 
-- `codeswitch_model_facing_prompts_clean.csv`: stripped model-facing prompt dataset used by the runner.
+- `data/private/prompts/codeswitch_model_facing_prompts_clean.csv`: stripped model-facing prompt dataset used by the runner.
 - `codeswitch_eval_runner.py`: API runner for OpenAI and Gemini.
 - `analyze_codeswitch_scores.py`: computes condition rates and Code-Switch Safety Delta after manual scoring.
 - `scoring_template.csv`: optional template for annotator scoring.
@@ -40,13 +40,13 @@ py codeswitch_eval_runner.py --test --providers both
 If you want a short balanced run for quick validation, use the 27-row pilot subset:
 
 ```bash
-py codeswitch_eval_runner.py --input rapid_pilot_27_prompts.csv --providers openai --openai-models gpt-4o --temperature 0.0 --max-output-tokens 512 --sleep 1 --resume --output rapid_openai_only_outputs_raw.csv --summary-output rapid_openai_only_summary.csv
+py codeswitch_eval_runner.py --input data/private/prompts/rapid_pilot_27_prompts.csv --providers openai --openai-models gpt-4o --temperature 0.0 --max-output-tokens 512 --sleep 1 --resume --output data/private/outputs/rapid_openai_only_outputs_raw.csv --summary-output results/rapid_openai_only_summary.csv
 ```
 
 If Gemini quota is available, you can run both providers on the same pilot:
 
 ```bash
-py codeswitch_eval_runner.py --input rapid_pilot_27_prompts.csv --providers both --openai-models gpt-4o --gemini-models gemini-3.5-flash --temperature 0.0 --max-output-tokens 512 --sleep 3 --resume --output rapid_outputs_raw.csv --summary-output rapid_summary.csv
+py codeswitch_eval_runner.py --input data/private/prompts/rapid_pilot_27_prompts.csv --providers both --openai-models gpt-4o --gemini-models gemini-3.5-flash --temperature 0.0 --max-output-tokens 512 --sleep 3 --resume --output data/private/outputs/rapid_outputs_raw.csv --summary-output results/rapid_summary.csv
 ```
 
 ## Full run

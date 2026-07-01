@@ -19,11 +19,11 @@ The harmful prompt corpora and any raw outputs that contain prompt text should s
 
 Keep local:
 
-- `codeswitch_model_facing_prompts_clean.csv`
-- `codeswitch_model_facing_prompts_clean.jsonl`
-- `codeswitch_model_facing_prompts_clean.xlsx`
-- `rapid_pilot_27_prompts.csv`
-- any `*_outputs_raw.csv` file
+- `data/private/prompts/codeswitch_model_facing_prompts_clean.csv`
+- `data/private/prompts/codeswitch_model_facing_prompts_clean.jsonl`
+- `data/private/prompts/codeswitch_model_facing_prompts_clean.xlsx`
+- `data/private/prompts/rapid_pilot_27_prompts.csv`
+- any `data/private/outputs/*_outputs_raw.csv` file
 - any other file that contains prompt text or model responses tied to those prompts
 
 ## What can be shared publicly
@@ -34,7 +34,7 @@ These are safe to publish and are the parts judges and collaborators need:
 - `analyze_codeswitch_scores.py`
 - `scoring_template.csv`
 - `RUNNER_QUICKSTART.md`
-- summary-only artifacts that do not expose prompt text
+- `results/*.csv` summary-only artifacts that do not expose prompt text
 - documentation and methodology notes
 
 ## Why the benchmark matters
@@ -49,6 +49,8 @@ This benchmark is built to expose that gap clearly. Each triplet holds the inten
 - `analyze_codeswitch_scores.py`: calculates condition rates and Code-Switch Safety Delta after manual scoring
 - `scoring_template.csv`: annotation template for manual scoring
 - `RUNNER_QUICKSTART.md`: quick setup and pilot instructions
+- `results/`: summary-only outputs for reporting and evidence
+- `data/private/`: local-only prompt corpora and raw outputs
 
 ## Quickstart
 
@@ -80,13 +82,13 @@ py codeswitch_eval_runner.py --test --providers both
 For a short balanced validation run, use the 27-row pilot subset:
 
 ```bash
-py codeswitch_eval_runner.py --input rapid_pilot_27_prompts.csv --providers openai --openai-models gpt-4o --temperature 0.0 --max-output-tokens 512 --sleep 1 --resume --output rapid_openai_only_outputs_raw.csv --summary-output rapid_openai_only_summary.csv
+py codeswitch_eval_runner.py --input data/private/prompts/rapid_pilot_27_prompts.csv --providers openai --openai-models gpt-4o --temperature 0.0 --max-output-tokens 512 --sleep 1 --resume --output data/private/outputs/rapid_openai_only_outputs_raw.csv --summary-output results/rapid_openai_only_summary.csv
 ```
 
 If Gemini quota is available, you can run both providers on the same pilot:
 
 ```bash
-py codeswitch_eval_runner.py --input rapid_pilot_27_prompts.csv --providers both --openai-models gpt-4o --gemini-models gemini-3.5-flash --temperature 0.0 --max-output-tokens 512 --sleep 3 --resume --output rapid_outputs_raw.csv --summary-output rapid_summary.csv
+py codeswitch_eval_runner.py --input data/private/prompts/rapid_pilot_27_prompts.csv --providers both --openai-models gpt-4o --gemini-models gemini-3.5-flash --temperature 0.0 --max-output-tokens 512 --sleep 3 --resume --output data/private/outputs/rapid_outputs_raw.csv --summary-output results/rapid_summary.csv
 ```
 
 ### 5. Score the outputs
