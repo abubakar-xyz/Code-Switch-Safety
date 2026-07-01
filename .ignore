@@ -1,0 +1,5 @@
+# Local environment secrets
+.env
+
+# Model-facing datasets
+codeswitch_model_facing_*

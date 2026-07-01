@@ -1,0 +1,6 @@
+# Local environment secrets
+.env
+
+# Model-facing datasets
+codeswitch_model_facing_*
+\[Updated Use this] codeswitch_safety_seed_suite_v2_1_fixed_ab0af9.xlsx
