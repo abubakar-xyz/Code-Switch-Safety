@@ -1,0 +1,33 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "rapid-openai-only",
+			"type": "shell",
+			"command": "py",
+			"args": [
+				"codeswitch_eval_runner.py",
+				"--input",
+				"rapid_pilot_27_prompts.csv",
+				"--providers",
+				"openai",
+				"--openai-models",
+				"gpt-4o",
+				"--temperature",
+				"0.0",
+				"--max-output-tokens",
+				"512",
+				"--sleep",
+				"1",
+				"--resume",
+				"--output",
+				"rapid_openai_only_outputs_raw.csv",
+				"--summary-output",
+				"rapid_openai_only_summary.csv"
+			],
+			"isBackground": true,
+			"problemMatcher": [],
+			"group": "build"
+		}
+	]
+}
