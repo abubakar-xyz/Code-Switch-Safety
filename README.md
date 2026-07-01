@@ -13,11 +13,11 @@ This repo gives you the tools to:
 - measure whether code-switching changes refusal behavior
 - produce a clean evidence trail for evaluation and submission use
 
-## What stays local
+## What stayed local
 
-The harmful prompt corpora and any raw outputs that contain prompt text should stay on the laptop only. That is intentional. The project is meant to publish the method, the analysis workflow, and the evidence structure without turning the repository into a reusable harmful prompt bank.
+The harmful prompt corpora and any raw outputs that contain prompt text stayed on the laptop. That is intentional. The project is meant to publish the method, the analysis workflow, and the evidence structure without turning the repository into a reusable harmful prompt bank.
 
-Keep local:
+Kept local:
 
 - `data/private/prompts/codeswitch_model_facing_prompts_clean.csv`
 - `data/private/prompts/codeswitch_model_facing_prompts_clean.jsonl`
@@ -26,9 +26,9 @@ Keep local:
 - any `data/private/outputs/*_outputs_raw.csv` file
 - any other file that contains prompt text or model responses tied to those prompts
 
-## What can be shared publicly
+## What is shared publicly
 
-These are safe to publish and are the parts judges and collaborators need:
+These are safe to publish and are the parts judges and collaborators typically need:
 
 - `codeswitch_eval_runner.py`
 - `analyze_codeswitch_scores.py`
@@ -126,8 +126,6 @@ This project is a measurement tool, not a model fix. Its main limits are:
 - manual scoring is still required
 - broader generalization across more models and contexts still needs further testing
 
-Those limits are deliberate: the goal here is to make one important failure mode visible, measurable, and easy to reproduce.
-
 ## License
 
-Recommended: MIT if you want a simple, permissive license for the code and workflow.
+MIT: for the code and workflow.
