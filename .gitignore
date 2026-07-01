@@ -4,3 +4,10 @@
 # Model-facing datasets
 codeswitch_model_facing_*
 \[Updated Use this] codeswitch_safety_seed_suite_v2_1_fixed_ab0af9.xlsx
+
+# Prompt-bearing pilots and raw outputs stay local
+rapid_pilot_27_prompts.csv
+*_outputs_raw.csv
+smoke_outputs_raw.csv
+outputs_raw.csv
+run_summary_latest.csv

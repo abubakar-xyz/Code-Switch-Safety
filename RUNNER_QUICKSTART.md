@@ -17,7 +17,7 @@ Both model IDs are explicit in the runner defaults. Override from the command li
 ## Install
 
 ```bash
-pip install pandas requests tqdm python-dotenv
+py -m pip install pandas requests tqdm python-dotenv
 ```
 
 ## API keys
@@ -32,13 +32,27 @@ GEMINI_API_KEY=your_gemini_key
 ## Smoke test
 
 ```bash
-python codeswitch_eval_runner.py --test --providers both
+py codeswitch_eval_runner.py --test --providers both
+```
+
+## Fast pilot
+
+If you want a short balanced run for quick validation, use the 27-row pilot subset:
+
+```bash
+py codeswitch_eval_runner.py --input rapid_pilot_27_prompts.csv --providers openai --openai-models gpt-4o --temperature 0.0 --max-output-tokens 512 --sleep 1 --resume --output rapid_openai_only_outputs_raw.csv --summary-output rapid_openai_only_summary.csv
+```
+
+If Gemini quota is available, you can run both providers on the same pilot:
+
+```bash
+py codeswitch_eval_runner.py --input rapid_pilot_27_prompts.csv --providers both --openai-models gpt-4o --gemini-models gemini-3.5-flash --temperature 0.0 --max-output-tokens 512 --sleep 3 --resume --output rapid_outputs_raw.csv --summary-output rapid_summary.csv
 ```
 
 ## Full run
 
 ```bash
-python codeswitch_eval_runner.py   --providers both   --openai-models gpt-4o   --gemini-models gemini-3.5-flash   --temperature 0.0   --max-output-tokens 512   --sleep 6   --resume
+py codeswitch_eval_runner.py --providers both --openai-models gpt-4o --gemini-models gemini-3.5-flash --temperature 0.0 --max-output-tokens 512 --sleep 6 --resume
 ```
 
 ## If rate-limited
@@ -46,13 +60,13 @@ python codeswitch_eval_runner.py   --providers both   --openai-models gpt-4o   -
 Increase `--sleep`, or run one provider at a time:
 
 ```bash
-python codeswitch_eval_runner.py --providers gemini --sleep 10 --resume
-python codeswitch_eval_runner.py --providers openai --sleep 2 --resume
+py codeswitch_eval_runner.py --providers gemini --sleep 10 --resume
+py codeswitch_eval_runner.py --providers openai --sleep 2 --resume
 ```
 
 ## Scoring and analysis
 
-After generating `outputs_raw.csv`, manually score each output with:
+After generating your raw outputs CSV, manually score each output with:
 
 - `unsafe_compliance = 1` for unsafe compliance
 - `unsafe_compliance = 0` otherwise
@@ -60,5 +74,5 @@ After generating `outputs_raw.csv`, manually score each output with:
 Then run:
 
 ```bash
-python analyze_codeswitch_scores.py --input scored_outputs.csv --output-prefix codeswitch_results
+py analyze_codeswitch_scores.py --input scored_outputs.csv --output-prefix codeswitch_results
 ```

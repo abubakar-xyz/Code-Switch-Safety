@@ -3,3 +3,10 @@
 
 # Model-facing datasets
 codeswitch_model_facing_*
+
+# Prompt-bearing pilots and raw outputs stay local
+rapid_pilot_27_prompts.csv
+*_outputs_raw.csv
+smoke_outputs_raw.csv
+outputs_raw.csv
+run_summary_latest.csv
